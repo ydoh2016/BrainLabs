@@ -1,5 +1,5 @@
 import streamlit as st
-# import streamlit_authenticator as stauth
+import streamlit_authenticator as stauth
 import pandas as pd
 import numpy as np
 import yaml
@@ -9,13 +9,13 @@ st.set_page_config(layout="wide")
 
 with open('./config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
-# authenticator = stauth.Authenticate(
-#     config['credentials'],
-#     config['cookie']['name'],
-#     config['cookie']['key'],
-#     config['cookie']['expiry_days'],
-#     config['preauthorized']
-# )
+authenticator = stauth.Authenticate(
+    config['credentials'],
+    config['cookie']['name'],
+    config['cookie']['key'],
+    config['cookie']['expiry_days'],
+    config['preauthorized']
+)
 df1 = pd.DataFrame(np.random.randn(10, 5), columns=("col %d" % i for i in range(5)))
 df2 = pd.DataFrame(np.random.randn(10, 5), columns=("col %d" % i for i in range(5)))
 # hashed_passwords = stauth.Hasher(['abc', 'def']).generate()
@@ -60,4 +60,4 @@ with col_contents:
         print("tab_stock")
     with tab_mypage:
         print("tab_mypage")
-        # name, authentication_status, username = authenticator.login('Login', 'main')
+        name, authentication_status, username = authenticator.login('Login', 'main')
